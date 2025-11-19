@@ -12,7 +12,7 @@ Model name is converted to lowercase for the collection name:
 """
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List, Dict
 
 # Example schemas (replace with your own):
 
@@ -37,6 +37,18 @@ class Product(BaseModel):
     price: float = Field(..., ge=0, description="Price in dollars")
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
+
+# WINX Quiz schemas
+class QuizResult(BaseModel):
+    """
+    Stores results of the Winx fairy quiz
+    Collection name: "quizresult" (lowercase)
+    """
+    name: str = Field(..., description="Player's name or alias")
+    answers: List[str] = Field(..., description="List of selected option keys per question")
+    fairy_type: str = Field(..., description="Determined WINX fairy type")
+    score_breakdown: Dict[str, int] = Field(..., description="Points awarded per fairy type")
+    aura_color: str = Field(..., description="Associated aura color for the fairy type")
 
 # Add your own schemas here:
 # --------------------------------------------------
